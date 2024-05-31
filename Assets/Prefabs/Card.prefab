@@ -65,7 +65,7 @@ MonoBehaviour:
   selected: 0
   selectionOffset: 25
   cardVisualPrefab: {fileID: 7310339964073049012, guid: bddd0263814164da396aa8d1438dd810, type: 3}
-  material: {fileID: 2100000, guid: 95d75f0e2081d3f48aae4aba84a2910e, type: 2}
+  material: {fileID: 2100000, guid: b7a6f0938af174d08a66011c1f8064e9, type: 2}
   cardVisual: {fileID: 0}
   isHovering: 0
   isDragging: 0
