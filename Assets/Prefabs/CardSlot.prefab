@@ -139,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8994356602663114153, guid: 38aa6ba35be5144dc931edb1e6e43818, type: 3}
       propertyPath: m_Name
-      value: A
+      value: Card
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
