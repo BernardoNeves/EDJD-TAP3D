@@ -3,6 +3,11 @@ Shader "Unlit/SwirlingVortexCard"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _SwirlSize ("Swirl Size", Range(1, 20)) = 10.0
+        _SwirlGap ("Swirl Gap", Range(0, 1)) = 0.1
+        _SwirlAlpha ("Swirl Alpha", Range(0, 1)) = 1.0
+        _SwirlColor ("Swirl Color", Color) = (1, 0, 0, 1)
+        _LineWidth ("Line Width", Range(0.1, 1.0)) = 0.1
     }
     SubShader
     {
@@ -27,79 +32,57 @@ Shader "Unlit/SwirlingVortexCard"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float3 wPos : TEXCOORD1;
+                float2 centeredUV : TEXCOORD1;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-
-            #define STEPS 128 
-            #define STEP_SIZE 0.02
-
-            float SphereDistance(float3 p, float3 center, float radius)
-            {
-                return length(p - center) - radius;
-            }
-
-            float3 RotateY(float3 p, float angle)
-            {
-                float cosAngle = cos(angle);
-                float sinAngle = sin(angle);
-                return float3(cosAngle * p.x + sinAngle * p.z, p.y, -sinAngle * p.x + cosAngle * p.z);
-            }
-
-            float3 RotateX(float3 p, float angle)
-            {
-                float cosAngle = cos(angle);
-                float sinAngle = sin(angle);
-                return float3(p.x, cosAngle * p.y - sinAngle * p.z, sinAngle * p.y + cosAngle * p.z);
-            }
-
-            float RayMarchDistance(float3 p)
-            {
-                float3 swirlCenterY = RotateY(p, length(p.xy) * 10.0);
-                float3 swirlCenter = RotateX(swirlCenterY, length(swirlCenterY.yz) * 10.0);
-				swirlCenter.z -= 1.0;
-                return SphereDistance(swirlCenter, float3(0, 0, 0), 0.5);
-            }
-
-            float RayMarch(float3 origin, float3 direction)
-            {
-                float totalDistance = 0.0;
-                for (int i = 0; i < STEPS; i++)
-                {
-                    float3 p = origin + totalDistance * direction;
-                    float d = RayMarchDistance(p);
-                    if (d < STEP_SIZE)
-                        return totalDistance;
-                    totalDistance += d * 0.5;
-                }
-                return 0.0;
-            }
+            float _SwirlSize;
+            float _SwirlGap;
+            float _SwirlAlpha;
+            float4 _SwirlColor;
+            float _LineWidth;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
-                o.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                
+                // Center the UV coordinates
+                o.centeredUV = o.uv - 0.5;
+
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float3 viewDir = normalize(i.wPos - _WorldSpaceCameraPos);
-                float depth = RayMarch(i.wPos, viewDir);
+                float2 p = i.centeredUV;
 
-                if (depth > 0.0)
-                {
-                    return fixed4(1.0 - depth, depth * 0.5, depth, 1.0);
-                }
-                else
-                {
-                    // Debugging color for no intersection
-                    return tex2D(_MainTex, i.uv);
-                }
+                // Calculate the angle based on centered UV coordinates
+                float angle = atan2(p.y, p.x) + length(p) * _SwirlSize;
+
+                // Rotate the coordinates to create the swirl effect
+                float cosAngle = cos(angle);
+                float sinAngle = sin(angle);
+                float2 rotatedUV = float2(cosAngle * p.x - sinAngle * p.y, sinAngle * p.x + cosAngle * p.y);
+
+                // Adjust the UV back to [0, 1] range
+                rotatedUV += 0.5;
+
+                // Sample the main texture with the original UV coordinates
+                fixed4 texColor = tex2D(_MainTex, i.uv);
+                
+                // Calculate the swirl lines based on the rotated coordinates
+                float pattern = frac(rotatedUV.x * 10.0 / (1.0 + _SwirlGap));
+                float linePattern = step(pattern, _LineWidth);
+
+                // Create the swirl lines with the specified color and alpha
+                fixed4 lineColor = _SwirlColor * linePattern;
+                lineColor.a *= _SwirlAlpha;
+
+                // Return the texture color or the line color
+                return lineColor.a > 0.0 ? lineColor : texColor;
             }
             ENDCG
         }

@@ -862,7 +862,7 @@ MonoBehaviour:
   cards: []
   tweenCardReturn: 1
   materials:
-  - {fileID: 2100000, guid: c85c5e60b48de5a459789f37b6eb3ebc, type: 2}
+  - {fileID: 2100000, guid: e26ff8c15566516489be431dd1af3199, type: 2}
 --- !u!114 &732881785
 MonoBehaviour:
   m_ObjectHideFlags: 0
