@@ -23,6 +23,7 @@ public class CardVisual : MonoBehaviour
     [SerializeField] private Transform shakeParent;
     [SerializeField] private Transform tiltParent;
     [SerializeField] private Image cardImage;
+    [SerializeField] private MeshRenderer cardMesh;
 
     [Header("Follow Parameters")]
     [SerializeField] private float followSpeed = 30f;
@@ -74,7 +75,10 @@ public class CardVisual : MonoBehaviour
 
         SubscribeToCardEvents();
 
-        cardImage.material = material;
+        if (cardImage != null && material != null)
+            cardImage.material = material;
+        else if (cardMesh != null && material != null)
+            cardMesh.material = material;
 
         initialized = true;
     }
@@ -174,7 +178,7 @@ public class CardVisual : MonoBehaviour
             transform.DOScale(scaleOnSelect, scaleTransition).SetEase(scaleEase);
         }
 
-        canvas.overrideSorting = true;
+        // canvas.overrideSorting = true;
     }
 
     private void EndDrag(Card card)
