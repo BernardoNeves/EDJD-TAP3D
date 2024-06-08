@@ -134,6 +134,7 @@ public class CardVisual : MonoBehaviour
 
     private void UpdateCardTilt()
     {
+        if (parentCard.isDragging) return;
         int savedIndex = parentCard.isDragging ? 0 : parentCard.ParentIndex();
         float sine = Mathf.Sin(Time.time + savedIndex) * (parentCard.isHovering ? 0.2f : 1);
         float cosine = Mathf.Cos(Time.time + savedIndex) * (parentCard.isHovering ? 0.2f : 1);
