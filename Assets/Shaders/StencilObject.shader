@@ -50,7 +50,12 @@ Shader "Custom/StencilObject"
             
             fixed4 frag(v2f i) : SV_Target
             {
-                return tex2D(_InsideTex, i.texcoord);
+				fixed4 col = tex2D(_InsideTex, i.texcoord);
+				if (col.a <= 0.5f)
+				{
+					discard;
+				}
+				return col;
             }
             ENDCG
         }

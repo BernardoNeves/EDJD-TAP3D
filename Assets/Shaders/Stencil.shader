@@ -11,7 +11,9 @@ Shader "Custom/Stencil"
     {
         Tags { "RenderType"="Opaque" "Queue"="Geometry" }
         LOD 100
+		ZWrite Off
 
+		// Stencil rendering inside the circle
         Pass
         {
             Stencil
@@ -62,17 +64,20 @@ Shader "Custom/Stencil"
                 
                 if (dis <= radius)
                 {
-					return fixed4(0, 0, 0, 0);
+					float4 color = tex2D(_MainTex, i.texcoord);
+					color.a = 0;
+					return color;
                 }
                 else
                 {
 					discard;
+					return fixed4(1, 1, 1, 1);
                 }
-				return fixed4(0, 0, 0, 0);
             }
             ENDCG
         }
 
+		// Normal rendering outside the circle
         Pass
         {
             CGPROGRAM

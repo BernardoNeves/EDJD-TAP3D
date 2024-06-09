@@ -3,6 +3,8 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
+
 public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
 {
     private Canvas canvas;
@@ -47,6 +49,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             cardVisual = Instantiate(cardVisualPrefab, transform.parent.transform).GetComponent<CardVisual>();
             cardVisual.Initialize(this, 0, material);
+            if (material.name == "Stencil")
+            {
+                GameObject backStencil = cardVisual.GetComponentsInChildren<Transform>(true)
+                                               .FirstOrDefault(child => child.name == "BackStencil")?
+                                               .gameObject;
+                Destroy(backStencil);
+            }
         }
     }
 
