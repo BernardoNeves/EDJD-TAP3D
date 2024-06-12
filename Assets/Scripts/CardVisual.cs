@@ -21,7 +21,7 @@ public class CardVisual : MonoBehaviour
     private Vector2 shadowDistance;
     private Canvas shadowCanvas;
     [SerializeField] private Transform shakeParent;
-    [SerializeField] private Transform tiltParent;
+    [SerializeField] public Transform tiltParent;
     [SerializeField] private Image cardImage;
     [SerializeField] private MeshRenderer cardMesh;
 

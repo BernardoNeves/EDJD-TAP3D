@@ -211,12 +211,12 @@ GameObject:
   - component: {fileID: 68770347}
   - component: {fileID: 68770346}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: EasterEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &68770346
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -298,8 +298,8 @@ Transform:
   m_GameObject: {fileID: 68770345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: -1}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalPosition: {x: 7, y: 0, z: -1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1077,6 +1077,7 @@ MonoBehaviour:
   cards: []
   tweenCardReturn: 1
   materials:
+  - {fileID: 2100000, guid: 0b7bec3de254a4645894ee360dfccd34, type: 2}
   - {fileID: 2100000, guid: e26ff8c15566516489be431dd1af3199, type: 2}
   - {fileID: 2100000, guid: 47b922146d776ec49a1fa112865afdf9, type: 2}
 --- !u!114 &732881785

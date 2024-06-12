@@ -40,6 +40,7 @@ Shader "Custom/WaterRippleEffect"
             float _RippleFrequency;
             float _RippleAmplitude;
             float _EdgeThreshold;
+            float2 _MousePosition;
 
             v2f vert(appdata v)
             {
@@ -59,13 +60,14 @@ Shader "Custom/WaterRippleEffect"
 
             fixed4 frag(v2f i) : SV_Target
             {
+				float2 center = float2(0.5, 0.5);
+				center += float2(_MousePosition.x, _MousePosition.y) * 10;
                 float time = _Time * _TimeScale;
                 float rippleEffect = ripple(i.uv, time);
-                float2 displacement = normalize(i.uv - float2(0.5, 0.5)) * rippleEffect;
+                float2 displacement = normalize(i.uv - center) * rippleEffect;
 
-                // Calculate edge threshold blending
-                float dist = distance(i.uv, float2(0.5, 0.5));
-                float edgeBlendFactor = 1- smoothstep(_EdgeThreshold, _EdgeThreshold + 0.1, dist);
+                float dist = distance(i.uv, center);
+                float edgeBlendFactor = 1 - smoothstep(_EdgeThreshold, _EdgeThreshold + 0.1, dist);
                 float2 uv = lerp(i.uv, i.uv + displacement, edgeBlendFactor);
 
                 fixed4 col = tex2D(_MainTex, uv);
