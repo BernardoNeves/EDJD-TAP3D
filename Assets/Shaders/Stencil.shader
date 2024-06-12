@@ -99,6 +99,7 @@ Shader "Custom/Stencil"
             float4 _MainTex_ST;
             float _EdgeThreshold;
 			bool _MouseHovering;
+			bool _CardSelected;
 			bool _CardDragging;
 
             v2f vert(appdata_t v)
@@ -133,7 +134,7 @@ Shader "Custom/Stencil"
 
                 if (uv.x > left && uv.x < right && uv.y > bottom && uv.y < top)
                 {
-					if (!_MouseHovering && !_CardDragging)
+					if (!_CardDragging && !_CardSelected)
 						return tex2D(_BackTex, i.texcoord);
 					discard;
                 }
