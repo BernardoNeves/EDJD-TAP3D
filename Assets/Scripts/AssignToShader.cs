@@ -51,6 +51,7 @@ public class AssignToShader: MonoBehaviour
 
     void OnMouseOver()
     {
+        if (cardVisual.parentCard.isDragging) return;
         AssignMousePosition();
     }
 

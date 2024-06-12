@@ -41,6 +41,8 @@ Shader "Custom/WaterRippleEffect"
             float _RippleAmplitude;
             float _EdgeThreshold;
             float2 _MousePosition;
+			bool _CardSelected;
+			bool _CardDragging;
 
             v2f vert(appdata v)
             {
@@ -60,6 +62,14 @@ Shader "Custom/WaterRippleEffect"
 
             fixed4 frag(v2f i) : SV_Target
             {
+				if(_CardSelected)
+				{
+					_RippleSpeed *= 2;
+				}
+				if(_CardDragging)
+				{
+					_EdgeThreshold = 0.5;
+				}
 				float2 center = float2(0.5, 0.5);
 				center += float2(_MousePosition.x, _MousePosition.y) * 10;
                 float time = _Time * _TimeScale;
