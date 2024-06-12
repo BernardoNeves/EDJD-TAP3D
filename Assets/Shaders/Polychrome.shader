@@ -38,7 +38,9 @@ Shader "Custom/Polychrome"
             float _HueOffset;
             float _SpiralSpeed;
             float _SpiralDensity;
-            float2 _Rotation;
+            float2 _CardRotation;
+			bool _CardSelected;
+			bool _CardDragging;
 
             v2f vert(appdata_t v)
             {
@@ -68,8 +70,8 @@ Shader "Custom/Polychrome"
             fixed4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.texcoord;
-				_Rotation *= 2.0;
-                float2 center = float2(0.5 - _Rotation.x, 0.5 - _Rotation.y);
+				_CardRotation *= 2.0;
+                float2 center = float2(0.5 - _CardRotation.x, 0.5 - _CardRotation.y);
 
                 float2 toCenter = uv - center;
                 float distance = length(toCenter);
@@ -77,6 +79,12 @@ Shader "Custom/Polychrome"
 
                 float time = _Time.y * _SpiralSpeed;
                 angle += distance * _SpiralDensity + time;
+				if (_CardSelected) {
+					angle += _Time.y * 5.0;
+				}
+				if (_CardDragging) {
+					angle += _Time.y * 20.0;
+				}
 
                 float hue = frac(angle / (2.0 * UNITY_PI) + _HueOffset);
                 float3 hsv = float3(hue, 1.0, 1.0);

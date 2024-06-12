@@ -3,6 +3,7 @@ Shader "Custom/Stencil"
     Properties
     {
         _MainTex ("Sprite Texture", 2D) = "white" {}
+		_BackTex ("Background Texture", 2D) = "white" {}
         [IntRange] _StencilRef ("Stencil Ref", Range(0, 255)) = 1
         _EdgeThreshold ("Edge Threshold", Float) = 0.05
     }
@@ -94,8 +95,11 @@ Shader "Custom/Stencil"
             };
             
             sampler2D _MainTex;
+			sampler2D _BackTex;
             float4 _MainTex_ST;
             float _EdgeThreshold;
+			bool _MouseHovering;
+			bool _CardDragging;
 
             v2f vert(appdata_t v)
             {
@@ -123,11 +127,15 @@ Shader "Custom/Stencil"
                 // Spinning edge effect
                 float2 direction = normalize(uv - center);
                 float angle = atan2(direction.y, direction.x)*3 + time;
+				if(_CardDragging)
+					angle *= 1.5;
                 float edgeValue = (sin(angle * 10.0) * 0.5 + 0.5);
 
                 if (uv.x > left && uv.x < right && uv.y > bottom && uv.y < top)
                 {
-                    discard;
+					if (!_MouseHovering && !_CardDragging)
+						return tex2D(_BackTex, i.texcoord);
+					discard;
                 }
                 else if (
                     abs(uv.x - left) <= lineThickness && uv.y >= bottom && uv.y <= top ||

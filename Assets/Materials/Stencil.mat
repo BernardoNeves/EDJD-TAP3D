@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BackTex:
+        m_Texture: {fileID: 2800000, guid: a645499deac5944f593fdcd569acc1e7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,6 +45,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FrontTex:
+        m_Texture: {fileID: 2800000, guid: b5dc0ac12ff3d4b61b4045e6a75c5d27, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HoleTex:

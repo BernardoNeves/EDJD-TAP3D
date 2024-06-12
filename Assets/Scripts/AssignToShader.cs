@@ -9,6 +9,9 @@ public class AssignToShader: MonoBehaviour
     {
         material = GetComponent<Renderer>().material;
         cardVisual = GetComponentInParent<CardVisual>();
+        cardVisual.parentCard.SelectEvent.AddListener(OnSelect);
+        cardVisual.parentCard.BeginDragEvent.AddListener(OnBeginDrag);
+        cardVisual.parentCard.EndDragEvent.AddListener(OnEndDrag);
     }
 
     void Update()
@@ -23,7 +26,7 @@ public class AssignToShader: MonoBehaviour
         angles.x = NormalizeAngle(angles.x);
         angles.y = NormalizeAngle(angles.y);
 
-        material.SetVector("_Rotation", new Vector2(-angles.y, angles.x));
+        material.SetVector("_CardRotation", new Vector2(-angles.y, angles.x));
     }
 
     float NormalizeAngle(float angle)
@@ -33,6 +36,11 @@ public class AssignToShader: MonoBehaviour
         return angle/360;
     }
 
+    void OnMouseEnter()
+    {
+        if (cardVisual.parentCard.isDragging) return;
+        material.SetFloat("_MouseHovering", 1);
+    }
 
     void OnMouseOver()
     {
@@ -41,6 +49,7 @@ public class AssignToShader: MonoBehaviour
 
     void OnMouseExit()
     {
+        material.SetFloat("_MouseHovering", 0);
         material.SetVector("_MousePosition", new Vector2(0, 0));
     }
 
@@ -56,6 +65,21 @@ public class AssignToShader: MonoBehaviour
         material.SetVector("_MousePosition", new Vector2(offset.x, offset.y));
     }
 
+    void OnSelect(Card card, bool selected)
+    {
+        material.SetFloat("_CardSelected", selected ? 1 : 0);
+    }
+
+    void OnBeginDrag(Card card)
+    {
+        material.SetFloat("_MouseHovering", 0);
+        material.SetFloat("_CardDragging", 1);
+    }
+
+    void OnEndDrag(Card card)
+    {
+        material.SetFloat("_MouseHovering", 0);
+        material.SetFloat("_CardDragging", 0);
+    }
+
 }
-
-
