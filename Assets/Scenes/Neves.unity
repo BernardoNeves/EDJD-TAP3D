@@ -365,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   hoveredCard: {fileID: 0}
+  instantiateMaterial: 0
   slotPrefab: {fileID: 3655645598659960977, guid: 1be24537077efa145a40dffb6b8ea054, type: 3}
   cardsToSpawn: 4
   cards: []
@@ -965,6 +966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   hoveredCard: {fileID: 0}
+  instantiateMaterial: 1
   slotPrefab: {fileID: 3655645598659960977, guid: 1be24537077efa145a40dffb6b8ea054, type: 3}
   cardsToSpawn: 5
   cards: []
@@ -973,6 +975,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6abc6b2a10e52468473f0eb83b8c42, type: 2}
   - {fileID: 2100000, guid: e26ff8c15566516489be431dd1af3199, type: 2}
   - {fileID: 2100000, guid: 47b922146d776ec49a1fa112865afdf9, type: 2}
+  - {fileID: 2100000, guid: 6850186c21455d64a8e4f17b0e811d24, type: 2}
 --- !u!114 &667881469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   hoveredCard: {fileID: 0}
+  instantiateMaterial: 1
   slotPrefab: {fileID: 3655645598659960977, guid: 1be24537077efa145a40dffb6b8ea054, type: 3}
   cardsToSpawn: 2
   cards: []

@@ -4,14 +4,21 @@ public class AssignToShader: MonoBehaviour
 {
     public Material material;
     private CardVisual cardVisual;
+    private bool instantiateMaterial = true;
 
     void Start()
     {
-        material = GetComponent<Renderer>().material;
+        GetComponentInParent<CardVisual>().parentCard.SelectEvent.AddListener(OnSelect);
         cardVisual = GetComponentInParent<CardVisual>();
         cardVisual.parentCard.SelectEvent.AddListener(OnSelect);
         cardVisual.parentCard.BeginDragEvent.AddListener(OnBeginDrag);
         cardVisual.parentCard.EndDragEvent.AddListener(OnEndDrag);
+        instantiateMaterial = cardVisual.parentCard.GetComponentInParent<CardHolder>().instantiateMaterial;
+
+        if (instantiateMaterial)
+            material = GetComponent<Renderer>().material;
+        else
+            material = GetComponent<Renderer>().sharedMaterial;
     }
 
     void Update()

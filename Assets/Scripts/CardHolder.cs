@@ -9,6 +9,7 @@ public class CardHolder : MonoBehaviour
 {
     [SerializeField] private Card selectedCard;
     [SerializeReference] private Card hoveredCard;
+    public bool instantiateMaterial = true;
 
     [SerializeField] private GameObject slotPrefab;
     private RectTransform rect;
