@@ -441,6 +441,7 @@ GameObject:
   - component: {fileID: 337266307}
   - component: {fileID: 337266306}
   - component: {fileID: 337266305}
+  - component: {fileID: 337266309}
   m_Layer: 0
   m_Name: FrontStencil
   m_TagString: Untagged
@@ -535,6 +536,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &337266309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337266304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a81d2149ba109d4bb0cfc3a32a42e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixilate: {fileID: 1069416629}
 --- !u!1 &463876659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,6 +1239,7 @@ GameObject:
   - component: {fileID: 1069416628}
   - component: {fileID: 1069416627}
   - component: {fileID: 1069416626}
+  - component: {fileID: 1069416629}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1306,6 +1321,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1069416629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069416625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aef45d7897fa748b92efbc36f79c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMaterial: {fileID: 2100000, guid: efd03f771844b72478dedf7dec4d34c2, type: 2}
+  pixelization: 0
+  pixelizationChangeSpeed: 2
 --- !u!1 &1131523890
 GameObject:
   m_ObjectHideFlags: 0
