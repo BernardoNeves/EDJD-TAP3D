@@ -1,10 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
-public class AssignToShader: MonoBehaviour
+public class AssignToShader : MonoBehaviour
 {
     public Material material;
     private CardVisual cardVisual;
     private bool instantiateMaterial = true;
+    private PostProcessingHolo postProcessingManager;
+    private bool isGrayscaleMaterial = false;
+    private bool isGlitchSpeedMaterial = false;
+
+    // Glitch effect variables
+    public float glitchChance = 0.1f;
+    private WaitForSeconds glitchLoopWait = new WaitForSeconds(0.1f);
+    private Coroutine glitchCoroutine;
 
     void Start()
     {
@@ -19,6 +28,11 @@ public class AssignToShader: MonoBehaviour
             material = GetComponent<Renderer>().material;
         else
             material = GetComponent<Renderer>().sharedMaterial;
+
+        postProcessingManager = Camera.main.GetComponent<PostProcessingHolo>();
+
+        isGrayscaleMaterial = material.HasProperty("_ApplyGrayscale");
+        isGlitchSpeedMaterial = material.HasProperty("_GlitchSpeed");
     }
 
     void Update()
@@ -40,7 +54,7 @@ public class AssignToShader: MonoBehaviour
     {
         while (angle > 180) angle -= 360;
         while (angle < -180) angle += 360;
-        return angle/360;
+        return angle / 360;
     }
 
     void OnMouseEnter()
@@ -82,12 +96,68 @@ public class AssignToShader: MonoBehaviour
     {
         material.SetFloat("_MouseHovering", 0);
         material.SetFloat("_CardDragging", 1);
+
+        if (isGrayscaleMaterial)
+        {
+            postProcessingManager.SetBorderEffect(Color.gray, 0.005f, true);
+            material.SetFloat("_ApplyGrayscale", 0.0f);
+        }
+
+        if (isGlitchSpeedMaterial)
+        {
+            // Start the glitch effect coroutine
+            if (glitchCoroutine != null)
+            {
+                StopCoroutine(glitchCoroutine);
+            }
+            glitchCoroutine = StartCoroutine(GlitchEffect());
+        }
     }
 
     void OnEndDrag(Card card)
     {
         material.SetFloat("_MouseHovering", 0);
         material.SetFloat("_CardDragging", 0);
+
+        if (isGrayscaleMaterial)
+        {
+            postProcessingManager.SetBorderEffect(Color.clear, 0.0f, false);
+            material.SetFloat("_ApplyGrayscale", 1.0f);
+        }
+
+        if (isGlitchSpeedMaterial)
+        {
+            // Stop the glitch effect coroutine
+            if (glitchCoroutine != null)
+            {
+                StopCoroutine(glitchCoroutine);
+                glitchCoroutine = null;
+
+                // Ensure glitch effect is reset
+                material.SetFloat("_GlitchIntensity", 0f);
+                material.SetFloat("_GlowIntensity", 0.5f); // Reset to default glow intensity, adjust as necessary
+            }
+        }
     }
 
+    IEnumerator GlitchEffect()
+    {
+        while (true)
+        {
+            float glitchTest = Random.Range(0f, 1f);
+
+            if (glitchTest <= glitchChance)
+            {
+                // Apply glitch effect
+                float originalGlowIntensity = material.GetFloat("_GlowIntensity");
+                material.SetFloat("_GlitchIntensity", Random.Range(0.07f, 0.1f));
+                material.SetFloat("_GlowIntensity", originalGlowIntensity * Random.Range(0.14f, 0.44f));
+                yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
+                material.SetFloat("_GlitchIntensity", 0f);
+                material.SetFloat("_GlowIntensity", originalGlowIntensity);
+            }
+
+            yield return glitchLoopWait;
+        }
+    }
 }
