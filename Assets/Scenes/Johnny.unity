@@ -259,11 +259,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   hoveredCard: {fileID: 0}
+  instantiateMaterial: 1
   slotPrefab: {fileID: 3655645598659960977, guid: 16d243388e7dfb545ae330540cccbb3c, type: 3}
   cardsToSpawn: 4
   cards: []
   tweenCardReturn: 1
-  materials: []
+  materials:
+  - {fileID: 2100000, guid: 6850186c21455d64a8e4f17b0e811d24, type: 2}
 --- !u!114 &176730505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,11 +753,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   hoveredCard: {fileID: 0}
+  instantiateMaterial: 0
   slotPrefab: {fileID: 3655645598659960977, guid: 16d243388e7dfb545ae330540cccbb3c, type: 3}
   cardsToSpawn: 5
   cards: []
   tweenCardReturn: 1
-  materials: []
+  materials:
+  - {fileID: 2100000, guid: 1d0fe0758e506a1469bf75d01f881601, type: 2}
 --- !u!114 &667881469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,11 +859,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCard: {fileID: 0}
   hoveredCard: {fileID: 0}
+  instantiateMaterial: 0
   slotPrefab: {fileID: 3655645598659960977, guid: 16d243388e7dfb545ae330540cccbb3c, type: 3}
   cardsToSpawn: 2
   cards: []
   tweenCardReturn: 1
-  materials: []
+  materials:
+  - {fileID: 2100000, guid: bd9cdb491e34f75498a7a2d0b720beb2, type: 2}
 --- !u!114 &732881785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,6 +1008,7 @@ GameObject:
   - component: {fileID: 1069416628}
   - component: {fileID: 1069416627}
   - component: {fileID: 1069416626}
+  - component: {fileID: 1069416629}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1083,6 +1090,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1069416629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069416625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb32b9286e54064595209f06985ff76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessingMaterial: {fileID: 2100000, guid: e79be620b2cc44147af638e1ab6b15d6, type: 2}
 --- !u!1 &1131523890
 GameObject:
   m_ObjectHideFlags: 0

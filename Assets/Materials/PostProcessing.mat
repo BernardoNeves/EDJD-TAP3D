@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Holographic
-  m_Shader: {fileID: 4800000, guid: f4653b0a12f9ecf47acdc09c3814431e, type: 3}
+  m_Name: PostProcessing
+  m_Shader: {fileID: 4800000, guid: 638ac0ed1fecf3247832ca2915cb10a6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -16,17 +16,13 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTexture:
-        m_Texture: {fileID: 2800000, guid: 04e05bd6304a98b42bbe96058e6515a2, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -47,12 +43,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _HoloTex:
-        m_Texture: {fileID: 2800000, guid: b6c8558f7a88f480eaeb3bbd9c9a9d9e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b5dc0ac12ff3d4b61b4045e6a75c5d27, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -69,33 +61,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _ApplyGrayscale: 0
+    - _BorderThickness: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlitchIntensity: 0
-    - _GlitchSpeed: 0
+    - _EffectStrength: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GlowIntensity: 0.5
-    - _Intensity: 0.53
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimPower: 8
-    - _Scale: 1
-    - _ScrollSpeed: 10
-    - _ScrollSpeedV: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TimeOffset: 35.081028
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8301887, g: 0.4891022, b: 0.4182271, a: 1}
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoloColor: {r: 1, g: 0.97834, b: 0, a: 1}
-    - _RimColor: {r: 1, g: 0.042602032, b: 0, a: 1}
   m_BuildTextureStacks: []
