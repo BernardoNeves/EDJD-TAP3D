@@ -989,6 +989,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6abc6b2a10e52468473f0eb83b8c42, type: 2}
   - {fileID: 2100000, guid: e26ff8c15566516489be431dd1af3199, type: 2}
   - {fileID: 2100000, guid: 47b922146d776ec49a1fa112865afdf9, type: 2}
+  - {fileID: 2100000, guid: 1d0fe0758e506a1469bf75d01f881601, type: 2}
 --- !u!114 &667881469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,6 +1241,7 @@ GameObject:
   - component: {fileID: 1069416627}
   - component: {fileID: 1069416626}
   - component: {fileID: 1069416629}
+  - component: {fileID: 1069416630}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1335,7 +1337,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectMaterial: {fileID: 2100000, guid: efd03f771844b72478dedf7dec4d34c2, type: 2}
   pixelization: 0
-  pixelizationChangeSpeed: 2
+  pixelizationChangeSpeed: 1
+--- !u!114 &1069416630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069416625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb32b9286e54064595209f06985ff76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessingMaterial: {fileID: 2100000, guid: e79be620b2cc44147af638e1ab6b15d6, type: 2}
 --- !u!1 &1131523890
 GameObject:
   m_ObjectHideFlags: 0
