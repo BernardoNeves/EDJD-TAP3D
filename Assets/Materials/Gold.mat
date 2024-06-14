@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hologram
-  m_Shader: {fileID: 4800000, guid: e345219401382af44b7b18757e5c6d19, type: 3}
+  m_Name: Gold
+  m_Shader: {fileID: 4800000, guid: 84b13e58239e7674e8b3bd822e73893e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,16 +43,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _HoloTex:
-        m_Texture: {fileID: 2800000, guid: b5dc0ac12ff3d4b61b4045e6a75c5d27, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _HoverTex:
-        m_Texture: {fileID: 2800000, guid: b6c8558f7a88f480eaeb3bbd9c9a9d9e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b5dc0ac12ff3d4b61b4045e6a75c5d27, type: 3}
+        m_Texture: {fileID: 2800000, guid: b6c8558f7a88f480eaeb3bbd9c9a9d9e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -69,9 +61,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BorderWidth: 0.03
     - _BumpScale: 1
-    - _CardDragging: 0
-    - _CardSelected: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -80,7 +71,6 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _MouseHovering: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -89,8 +79,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _CardRotation: {r: -0.03477868, g: 0.022946801, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BorderColor: {r: 0.9056604, g: 0.7423708, b: 0.42207187, a: 1}
+    - _Color: {r: 0.9150943, g: 0.8884845, b: 0.2365432, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoloColor: {r: 1, g: 0.017913934, b: 0, a: 1}
+    - _HighlightColor: {r: 0.7169812, g: 0.45589182, b: 0.45589182, a: 1}
+    - _MousePosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

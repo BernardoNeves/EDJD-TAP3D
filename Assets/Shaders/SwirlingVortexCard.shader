@@ -2,11 +2,11 @@ Shader "Unlit/SwirlingVortexCard"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _SwirlSize ("Swirl Size", Range(1, 20)) = 10.0
-        _SwirlGap ("Swirl Gap", Range(0, 1)) = 0.1
-        _LineWidth ("Line Width", Range(0.1, 1.0)) = 0.1
-		_TimeFactor ("Time Factor", Range(0.1, 10.0)) = 1.0
+        _MainTex ("Texture", 2D) = "white" {}  // Textura principal
+        _SwirlSize ("Swirl Size", Range(1, 20)) = 10.0  // Tamanho do redemoinho
+        _SwirlGap ("Swirl Gap", Range(0, 1)) = 0.1  // Espaçamento do redemoinho
+        _LineWidth ("Line Width", Range(0.1, 1.0)) = 0.1  // Largura da linha
+        _TimeFactor ("Time Factor", Range(0.1, 10.0)) = 1.0  // Fator de tempo para animar o redemoinho
     }
     SubShader
     {
@@ -23,32 +23,32 @@ Shader "Unlit/SwirlingVortexCard"
 
             struct appdata
             {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 vertex : POSITION;  // Posição do vértice
+                float2 uv : TEXCOORD0;  // Coordenada UV
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
-                float2 centeredUV : TEXCOORD1;
+                float2 uv : TEXCOORD0;  // Coordenada UV
+                float4 vertex : SV_POSITION;  // Posição do vértice na tela
+                float2 centeredUV : TEXCOORD1;  // Coordenada UV centrada
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float _SwirlSize;
-            float _SwirlGap;
-            float _LineWidth;
-			float _TimeFactor;
-			bool _CardSelected;
+            sampler2D _MainTex;  // Amostrador para a textura principal
+            float4 _MainTex_ST;  // Transformações da textura principal
+            float _SwirlSize;  // Tamanho do redemoinho
+            float _SwirlGap;  // Espaçamento do redemoinho
+            float _LineWidth;  // Largura da linha
+            float _TimeFactor;  // Fator de tempo para animar o redemoinho
+            bool _CardSelected;  // Indica se o cartão está selecionado
 
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.vertex = UnityObjectToClipPos(v.vertex);  // Converte a posição do objeto para posição de clip
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);  // Transforma a coordenada de textura
                 
-                // Center the UV coordinates
+                // Centraliza as coordenadas UV
                 o.centeredUV = o.uv - 0.5;
 
                 return o;
@@ -58,35 +58,37 @@ Shader "Unlit/SwirlingVortexCard"
             {
                 float2 p = i.centeredUV;
 
-                // Calculate the angle based on centered UV coordinates
+                // Calcula o ângulo com base nas coordenadas UV centradas
                 float angle = atan2(p.y, p.x) + length(p) * _SwirlSize + _Time.y * _TimeFactor;
 
-                // Rotate the coordinates to create the swirl effect
+                // Roda as coordenadas para criar o efeito de redemoinho
                 float cosAngle = cos(angle);
                 float sinAngle = sin(angle);
                 float2 rotatedUV = float2(cosAngle * p.x - sinAngle * p.y, sinAngle * p.x + cosAngle * p.y);
-					
 
-                // Adjust the UV back to [0, 1] range
+                // Ajusta as coordenadas UV de volta para o intervalo [0, 1]
                 rotatedUV += 0.5;
 
-                // Sample the main texture with the original UV coordinates
+                // Amostra a textura principal com as coordenadas UV originais
                 fixed4 texColor = tex2D(_MainTex, i.uv);
                 
-                // Calculate the swirl lines based on the rotated coordinates
+                // Calcula as linhas do redemoinho com base nas coordenadas rodadas
                 float pattern = frac(rotatedUV.x * 10.0 / (1.0 + _SwirlGap));
-				_LineWidth *= abs(sin(_Time.y * _TimeFactor));
+                _LineWidth *= abs(sin(_Time.y * _TimeFactor));  // Ajusta a largura da linha com base no tempo
                 float linePattern = step(pattern, _LineWidth);
-				//invert the swirl
-				if (_CardSelected)
-					linePattern = 1.0 - linePattern;
 
-                // Create the swirl lines with the specified color and alpha
+                // Inverte o redemoinho se o cartão estiver selecionado
+                if (_CardSelected)
+                    linePattern = 1.0 - linePattern;
+
+                // Cria as linhas do redemoinho com a cor e alfa especificados
                 fixed4 lineColor = fixed4(0.0, 0.0, 0.0, linePattern);
-				if (lineColor.a != 0.0)
-					discard;
+                
+                // Descarta o fragmento se a linha não for transparente
+                if (lineColor.a != 0.0)
+                    discard;
 
-                // Return the texture color or the line color
+                // Retorna a cor da textura ou a cor da linha
                 return lineColor.a > 0.0 ? lineColor : texColor;
             }
             ENDCG

@@ -371,8 +371,9 @@ MonoBehaviour:
   cards: []
   tweenCardReturn: 1
   materials:
-  - {fileID: 2100000, guid: e26ff8c15566516489be431dd1af3199, type: 2}
-  - {fileID: 2100000, guid: 47b922146d776ec49a1fa112865afdf9, type: 2}
+  - {fileID: 2100000, guid: bd9cdb491e34f75498a7a2d0b720beb2, type: 2}
+  - {fileID: 2100000, guid: 1d0fe0758e506a1469bf75d01f881601, type: 2}
+  - {fileID: 2100000, guid: 6850186c21455d64a8e4f17b0e811d24, type: 2}
 --- !u!114 &176730505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +990,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6abc6b2a10e52468473f0eb83b8c42, type: 2}
   - {fileID: 2100000, guid: e26ff8c15566516489be431dd1af3199, type: 2}
   - {fileID: 2100000, guid: 47b922146d776ec49a1fa112865afdf9, type: 2}
-  - {fileID: 2100000, guid: 1d0fe0758e506a1469bf75d01f881601, type: 2}
+  - {fileID: 2100000, guid: 0b7bec3de254a4645894ee360dfccd34, type: 2}
 --- !u!114 &667881469
 MonoBehaviour:
   m_ObjectHideFlags: 0
