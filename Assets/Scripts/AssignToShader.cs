@@ -6,7 +6,6 @@ public class AssignToShader : MonoBehaviour
     public Material material;
     private CardVisual cardVisual;
     private bool instantiateMaterial = true;
-    private PostProcessingHolo postProcessingManager;
     private bool isGrayscaleMaterial = false;
     private bool isGlitchSpeedMaterial = false;
 
@@ -14,6 +13,9 @@ public class AssignToShader : MonoBehaviour
     public float glitchChance = 0.1f;
     private WaitForSeconds glitchLoopWait = new WaitForSeconds(0.1f);
     private Coroutine glitchCoroutine;
+    
+    private PostProcessingHolo postProcessingManager;
+    private PostProcessingOverlay postProcessingOverlay;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class AssignToShader : MonoBehaviour
             material = GetComponent<Renderer>().sharedMaterial;
 
         postProcessingManager = Camera.main.GetComponent<PostProcessingHolo>();
+        postProcessingOverlay = Camera.main.GetComponent<PostProcessingOverlay>();
 
         isGrayscaleMaterial = material.HasProperty("_ApplyGrayscale");
         isGlitchSpeedMaterial = material.HasProperty("_GlitchSpeed");
@@ -99,7 +102,7 @@ public class AssignToShader : MonoBehaviour
 
         if (isGrayscaleMaterial)
         {
-            postProcessingManager.SetBorderEffect(Color.gray, 0.005f, true);
+            postProcessingManager.SetBorderEffect(Color.gray, 0.005f, true, true);
             material.SetFloat("_ApplyGrayscale", 0.0f);
         }
 
@@ -121,7 +124,7 @@ public class AssignToShader : MonoBehaviour
 
         if (isGrayscaleMaterial)
         {
-            postProcessingManager.SetBorderEffect(Color.clear, 0.0f, false);
+            postProcessingManager.SetBorderEffect(Color.clear, 0.0f, false, false);
             material.SetFloat("_ApplyGrayscale", 1.0f);
         }
 
@@ -138,6 +141,10 @@ public class AssignToShader : MonoBehaviour
                 material.SetFloat("_GlowIntensity", 0.5f); // Reset to default glow intensity, adjust as necessary
             }
         }
+
+        Vector3 mousePos = Input.mousePosition;
+
+        postProcessingOverlay.SetEffect(mousePos);
     }
 
     IEnumerator GlitchEffect()

@@ -5,7 +5,9 @@ Shader "Custom/PostProcessing"
         _MainTex("Texture", 2D) = "white" {}
         _BorderColor("Border Color", Color) = (1,1,1,1)
         _BorderThickness("Border Thickness", Float) = 0.05
-        _ApplyGrayscale("Apply Grayscale", Float) = 1.0
+        _ApplyGrayscale("Apply Grayscale", Float) = 0.0
+        _CenterTex("Center Texture", 2D) = "white" {} // New property
+        _HaveText("Have Text", Float) = 0.0
     }
         SubShader
         {
@@ -39,9 +41,11 @@ Shader "Custom/PostProcessing"
                 };
 
                 sampler2D _MainTex;
+                sampler2D _CenterTex;
                 float4 _BorderColor;
                 float _BorderThickness;
                 float _ApplyGrayscale;
+                float _HaveText;
 
                 v2f vert(appdata v)
                 {
@@ -65,6 +69,22 @@ Shader "Custom/PostProcessing"
                         // Apply grayscale effect
                         float gray = dot(col.rgb, float3(0.299, 0.587, 0.114));
                         col.rgb = float3(gray, gray, gray);
+                    }
+
+                    if (_HaveText > 0.0) // Corrected condition
+                    {
+                        // Center UV coordinates
+                        float2 centerUV = (i.uv - 0.5) * 2.0; // Center the UV coordinates around (0,0)
+
+                        // Adjust the size of the center texture
+                        float scale = 0.5; // Adjust this value to scale the center texture
+                        centerUV /= scale;
+
+                        if (abs(centerUV.x) < 1.0 && abs(centerUV.y) < 1.0)
+                        {
+                            half4 centerTexCol = tex2D(_CenterTex, centerUV * 0.5 + 0.5);
+                            col = lerp(col, centerTexCol, centerTexCol.a); // Blend based on alpha
+                        }
                     }
 
                     return col;
