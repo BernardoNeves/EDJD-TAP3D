@@ -74,7 +74,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PixelationAmount: 10
-    - _Pixelization: 1
+    - _Pixelization: 0
     - _ResolutionControl: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
